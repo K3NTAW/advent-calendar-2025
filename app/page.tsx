@@ -23,8 +23,8 @@ export default function Home() {
     const saved = localStorage.getItem("openedDoors");
     if (saved) {
       try {
-        const doors = JSON.parse(saved);
-        const doorsSet = new Set(doors);
+        const doors = JSON.parse(saved) as number[];
+        const doorsSet = new Set<number>(doors);
         // Always ensure door 1 is open
         doorsSet.add(1);
         setOpenedDoors(doorsSet);
