@@ -55,7 +55,7 @@ export const gifts: Gift[] = [
       },
       {
         label: "Visit Website",
-        url: "garden.iluvu.ch" // TODO: Add your website URL here
+        url: "https://garden.iluvu.ch"
       }
     ],
     message: "I hope these songs bring you joy this holiday season! ❤️"

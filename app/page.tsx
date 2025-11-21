@@ -13,7 +13,7 @@ import { Gift } from "@/types";
 import confetti from "canvas-confetti";
 
 export default function Home() {
-  const [openedDoors, setOpenedDoors] = useState<Set<number>>(new Set());
+  const [openedDoors, setOpenedDoors] = useState<Set<number>>(new Set([1])); // Door 1 is open by default
   const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const gifts = getAllGifts();
@@ -24,10 +24,18 @@ export default function Home() {
     if (saved) {
       try {
         const doors = JSON.parse(saved);
-        setOpenedDoors(new Set(doors));
+        const doorsSet = new Set(doors);
+        // Always ensure door 1 is open
+        doorsSet.add(1);
+        setOpenedDoors(doorsSet);
       } catch (e) {
         console.error("Error loading opened doors:", e);
+        // If error, still ensure door 1 is open
+        setOpenedDoors(new Set([1]));
       }
+    } else {
+      // If no saved data, ensure door 1 is open
+      setOpenedDoors(new Set([1]));
     }
   }, []);
 
