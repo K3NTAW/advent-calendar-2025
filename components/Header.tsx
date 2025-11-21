@@ -1,13 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { getCurrentDay, isAdventSeason, isTestMode } from "@/lib/calendar";
+import { getCurrentDay, isAdventSeason, isTestMode, getCurrentDate } from "@/lib/calendar";
 import { Sparkles, TestTube } from "lucide-react";
 
 export default function Header() {
   const currentDay = getCurrentDay();
   const inAdvent = isAdventSeason();
   const testMode = isTestMode();
+  const testDate = testMode ? getCurrentDate() : null;
+  const testDateString = testDate
+    ? testDate.toLocaleDateString("en-US", { month: "long", day: "numeric" })
+    : "";
 
   return (
     <header className="w-full py-8 px-4 text-center">
@@ -18,7 +22,7 @@ export default function Header() {
           className="mb-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 border border-yellow-300 text-yellow-800 text-sm font-medium"
         >
           <TestTube className="w-4 h-4" />
-          <span>Test Mode: Simulating December 1st</span>
+          <span>Test Mode: Simulating {testDateString}</span>
         </motion.div>
       )}
       <motion.div
@@ -28,7 +32,7 @@ export default function Header() {
         className="max-w-4xl mx-auto"
       >
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-burgundy-700 mb-4">
-          Advent Calendar 2024
+          Advent Calendar 2025
         </h1>
         <p className="text-lg sm:text-xl text-gray-600 mb-2 font-script">
           A special calendar made with love ❤️

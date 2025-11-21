@@ -21,7 +21,7 @@ const dancing = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Advent Calendar 2024",
+  title: "Advent Calendar 2025",
   description: "A special advent calendar with love",
 };
 

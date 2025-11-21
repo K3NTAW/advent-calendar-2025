@@ -12,12 +12,13 @@ const ADVENT_START_DAY = 1;
  * Change this to false when you're done testing
  * 
  * To test different days, change TEST_DATE:
- * - December 1st: new Date(2024, 11, 1)  (day 1)
- * - December 5th: new Date(2024, 11, 5)  (day 5)
- * - December 24th: new Date(2024, 11, 24) (day 24)
+ * - December 1st: new Date(2025, 11, 1)  (day 1)
+ * - December 2nd: new Date(2025, 11, 2)  (day 2)
+ * - December 5th: new Date(2025, 11, 5)  (day 5)
+ * - December 24th: new Date(2025, 11, 24) (day 24)
  */
-const TEST_MODE = true;
-const TEST_DATE = new Date(2024, 11, 1); // December 1, 2024
+const TEST_MODE = false;
+const TEST_DATE = new Date(2025, 11, 2); // December 2, 2025
 
 /**
  * Check if test mode is enabled (for UI indicators)

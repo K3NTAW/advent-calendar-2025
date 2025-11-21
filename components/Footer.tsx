@@ -10,7 +10,7 @@ export default function Footer() {
         <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
         <span className="text-sm">for you</span>
       </div>
-      <p className="text-xs text-gray-500 mt-2">Advent Calendar 2024</p>
+      <p className="text-xs text-gray-500 mt-2">Advent Calendar 2025</p>
     </footer>
   );
 }
