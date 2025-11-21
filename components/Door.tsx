@@ -13,8 +13,9 @@ interface DoorProps {
 
 export default function Door({ day, isUnlockable, isOpened, onClick }: DoorProps) {
   const handleClick = () => {
-    if (!isUnlockable) {
-      // Shake animation for locked doors
+    // Allow clicking on opened doors or unlockable doors
+    if (!isUnlockable && !isOpened) {
+      // Door is locked and not opened - shake animation
       return;
     }
     onClick();

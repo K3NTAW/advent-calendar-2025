@@ -13,7 +13,7 @@ import { Gift } from "@/types";
 import confetti from "canvas-confetti";
 
 export default function Home() {
-  const [openedDoors, setOpenedDoors] = useState<Set<number>>(new Set([1])); // Door 1 is open by default
+  const [openedDoors, setOpenedDoors] = useState<Set<number>>(new Set());
   const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const gifts = getAllGifts();
@@ -24,18 +24,10 @@ export default function Home() {
     if (saved) {
       try {
         const doors = JSON.parse(saved) as number[];
-        const doorsSet = new Set<number>(doors);
-        // Always ensure door 1 is open
-        doorsSet.add(1);
-        setOpenedDoors(doorsSet);
+        setOpenedDoors(new Set<number>(doors));
       } catch (e) {
         console.error("Error loading opened doors:", e);
-        // If error, still ensure door 1 is open
-        setOpenedDoors(new Set([1]));
       }
-    } else {
-      // If no saved data, ensure door 1 is open
-      setOpenedDoors(new Set([1]));
     }
   }, []);
 
@@ -47,8 +39,10 @@ export default function Home() {
   }, [openedDoors]);
 
   const handleDoorClick = (day: number) => {
-    if (!isDoorUnlockable(day)) {
-      // Door is locked - could add shake animation here
+    // Allow clicking on already-opened doors, or doors that are unlockable
+    const isAlreadyOpened = openedDoors.has(day);
+    if (!isDoorUnlockable(day) && !isAlreadyOpened) {
+      // Door is locked and not opened - could add shake animation here
       return;
     }
 
@@ -58,10 +52,12 @@ export default function Home() {
       setIsModalOpen(true);
 
       // Check if this is the first time opening this door
-      const isFirstOpen = !openedDoors.has(day);
+      const isFirstOpen = !isAlreadyOpened;
 
-      // Mark door as opened
-      setOpenedDoors((prev) => new Set([...prev, day]));
+      // Mark door as opened (if not already)
+      if (isFirstOpen) {
+        setOpenedDoors((prev) => new Set([...prev, day]));
+      }
 
       // Confetti effect only on first open!
       if (isFirstOpen && typeof window !== "undefined") {
