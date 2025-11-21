@@ -117,23 +117,49 @@ export default function GiftModal({ gift, isOpen, onClose }: GiftModalProps) {
                   </motion.div>
                 )}
 
-                {/* Link Button */}
-                {gift.link && (
-                  <motion.a
-                    href={gift.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-burgundy-500 to-burgundy-600 text-white font-semibold hover:from-burgundy-600 hover:to-burgundy-700 transition-all shadow-lg hover:shadow-xl mx-auto block w-fit"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span>Open Gift</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </motion.a>
-                )}
+                {/* Link Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
+                  {/* Multiple Links */}
+                  {gift.links && gift.links.length > 0 && (
+                    <>
+                      {gift.links.map((linkItem, index) => (
+                        <motion.a
+                          key={index}
+                          href={linkItem.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-burgundy-500 to-burgundy-600 text-white font-semibold hover:from-burgundy-600 hover:to-burgundy-700 transition-all shadow-lg hover:shadow-xl"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 + index * 0.1 }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <span>{linkItem.label}</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </motion.a>
+                      ))}
+                    </>
+                  )}
+                  
+                  {/* Single Link (for backward compatibility) */}
+                  {!gift.links && gift.link && (
+                    <motion.a
+                      href={gift.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-burgundy-500 to-burgundy-600 text-white font-semibold hover:from-burgundy-600 hover:to-burgundy-700 transition-all shadow-lg hover:shadow-xl"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <span>Open Gift</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.a>
+                  )}
+                </div>
 
                 {/* Type Badge */}
                 {gift.type && (

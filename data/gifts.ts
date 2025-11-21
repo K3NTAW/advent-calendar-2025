@@ -12,11 +12,13 @@ import { Gift } from "@/types";
  * 
  * Optional fields:
  * - image: URL or path to an image (e.g., "/images/gift1.jpg")
- * - link: URL to the gift (e.g., Spotify playlist, game link, etc.)
+ * - link: Single URL to the gift (for backward compatibility)
+ * - links: Array of links with labels (for multiple links like website + playlist)
+ *   Example: [{ label: "Spotify Playlist", url: "https://..." }, { label: "Visit Website", url: "https://..." }]
  * - message: A personal message to go with the gift
  * - type: "digital", "physical", "experience", or "message"
  * 
- * Example:
+ * Example with single link:
  * {
  *   day: 1,
  *   title: "Spotify Playlist",
@@ -25,19 +27,37 @@ import { Gift } from "@/types";
  *   type: "digital",
  *   message: "I hope these songs bring you joy this holiday season! ❤️"
  * }
+ * 
+ * Example with multiple links:
+ * {
+ *   day: 1,
+ *   title: "Spotify Playlist & Website",
+ *   description: "Holiday songs and a special website",
+ *   links: [
+ *     { label: "Spotify Playlist", url: "https://open.spotify.com/playlist/..." },
+ *     { label: "Visit Website", url: "https://yourwebsite.com" }
+ *   ],
+ *   type: "digital"
+ * }
  */
 
 export const gifts: Gift[] = [
   // Day 1
   {
     day: 1,
-    title: "Spotify Playlist",
-    description: "Holiday and Christmas songs",
+    title: "Spotify Playlist & Website",
+    description: "Holiday and Christmas songs, plus a special website",
     type: "digital",
-    // TODO: Add your Spotify playlist link
-    // link: "https://open.spotify.com/playlist/...",
-    // message: "Your personal message here"
-    link: "https://open.spotify.com/playlist/7I2JYQdIqTgyWqHXs5cQhd?si=072328384365462c",
+    links: [
+      {
+        label: "Spotify Playlist",
+        url: "https://open.spotify.com/playlist/6gAQX62U6nlwayBJk46j8e?si=01ff8ea7b7be4e34&pt=c3bf0203a80ce8f6fca0165cb8c00ea1"
+      },
+      {
+        label: "Visit Website",
+        url: "garden.iluvu.ch" // TODO: Add your website URL here
+      }
+    ],
     message: "I hope these songs bring you joy this holiday season! ❤️"
   },
   // Day 2
